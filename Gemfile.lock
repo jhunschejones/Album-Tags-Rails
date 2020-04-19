@@ -67,8 +67,6 @@ GEM
     bootsnap (1.4.6)
       msgpack (~> 1.0)
     builder (3.2.4)
-    bulma-rails (0.8.0)
-      sassc (~> 2.0)
     byebug (11.1.2)
     capybara (3.32.1)
       addressable
@@ -246,7 +244,6 @@ PLATFORMS
 DEPENDENCIES
   blind_index
   bootsnap (>= 1.4.2)
-  bulma-rails
   byebug
   capybara (>= 2.15)
   devise

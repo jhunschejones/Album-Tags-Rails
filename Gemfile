@@ -16,7 +16,6 @@ gem 'devise_invitable'
 gem 'devise-async'
 gem 'lockbox'
 gem 'blind_index'
-gem 'bulma-rails'
 gem 'font_awesome5_rails'
 gem 'sidekiq'
 
