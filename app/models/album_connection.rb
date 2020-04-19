@@ -1,6 +1,5 @@
 class AlbumConnection < ApplicationRecord
-
-  belongs_to :album_a, :class_name => :Album
-  belongs_to :album_b, :class_name => :Album
-  
+  belongs_to :parent_album_id, :class_name => :Album
+  belongs_to :child_album_id, :class_name => :Album
+  belongs_to :user
 end

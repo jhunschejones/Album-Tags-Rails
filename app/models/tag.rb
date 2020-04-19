@@ -1,6 +1,4 @@
 class Tag < ApplicationRecord
-
-  has_and_belongs_to_many :albums
-  belongs_to :user
-  
+  has_many :albums, through: :album_tags
+  has_many :users, through: :album_tags
 end
