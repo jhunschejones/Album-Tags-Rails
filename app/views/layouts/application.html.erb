@@ -3,15 +3,73 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AlbumTags</title>
+    <title>Album Tags</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto|Open+Sans" />
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <%= image_tag("headphones_100.png", height: "28") %>
+          <span class="site-title">Album Tags</span>
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="navbar-menu main-nav-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="/tags">All Tags</a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">Lists</a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item">My favorites</a>
+              <a class="navbar-item">Emo nostalgia</a>
+              <a class="navbar-item">Roo records</a>
+            </div>
+          </div>
+
+          <a class="navbar-item" href="/search">Search</a>
+
+          <% if current_user && !current_user.new_record? %>
+            <a class="navbar-item nav-link" href="/users/<%= current_user.id %>">My Profile</a>
+          <% end %>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <% if user_signed_in? %>
+                <%= link_to(destroy_user_session_path, method: :delete, class: "button is-small is-danger") do %>
+                  <strong>Log out</strong>
+                <% end %>
+              <% else %>
+                <%= link_to(new_user_registration_path, class: "button is-small is-success") do %>
+                  <strong>Sign up</strong>
+                <% end %>
+                <%= link_to(new_user_session_path, class: "button is-small is-light") do %>
+                  <strong>Log in</strong>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+
+
     <%= yield %>
   </body>
 </html>

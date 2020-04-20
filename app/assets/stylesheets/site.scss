@@ -1,0 +1,81 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.has-text-purple {
+  // color: #9575cd;
+  color: #7e57c2;
+}
+
+.has-text-cyan {
+  color: #26c6da;
+}
+
+.has-text-light-blue {
+  color: #03a9f4;
+}
+
+.site-title {
+  font-size: 22px;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.navbar-dropdown {
+  border-top: none;
+  background-color: #fff;
+  padding: 0px;
+  .navbar-item {
+    // Trim overflow of list names on smaller screens
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.devise-form-container {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  .devise-form {
+    max-width: 600px;
+    width: 100%;
+  }
+}
+
+.search {
+  padding: 12px;
+  .search-input-container {
+    h2 {
+      margin-bottom: 10px;
+    }
+  }
+  .search-results-container {
+    padding-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+// inspired by https://cssninja.io/blog/post/simple-loader-bulma
+.spinner-container {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  .spinner {
+    height: 90px;
+    width: 90px;
+    border-width: 3px;
+  }
+  &.is-active {
+    opacity: 1;
+  }
+}
