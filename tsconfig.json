@@ -4,6 +4,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": ["es6", "dom"],
+    "jsx": "react",
     "module": "es6",
     "moduleResolution": "node",
     "baseUrl": ".",
@@ -11,13 +12,7 @@
         "*": ["node_modules/*", "app/javascript/*"]
     },
     "sourceMap": true,
-    "target": "es5",
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictPropertyInitialization": true,
-    "jsx": "react"
+    "target": "es5"
   },
   "exclude": [
     "**/*.spec.ts",
