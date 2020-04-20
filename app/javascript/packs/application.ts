@@ -6,3 +6,12 @@ import Turbolinks from "turbolinks";
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
+
+import MenuHamburger from "src/menu_hamburger";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const hamburgerElement = document.querySelector(
+    ".navbar-burger"
+  ) as HTMLElement;
+  new MenuHamburger(hamburgerElement).initHandlers();
+});
