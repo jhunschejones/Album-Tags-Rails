@@ -13,14 +13,13 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "ts-loader": "^7.0.0",
     "turbolinks": "^5.2.0",
     "typescript": "^3.8.3"
   },
   "version": "0.1.0",
   "devDependencies": {
-    "prettier": "^2.0.4",
     "@babel/preset-typescript": "^7.9.0",
+    "prettier": "^2.0.4",
     "tslint": "^6.1.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.3.0",
