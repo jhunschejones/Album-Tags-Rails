@@ -4,10 +4,9 @@ module AppleMusic
   class AlbumNotFound < StandardError; end
   class NoMatchingAlbumResults < StandardError; end
 
-  EXTERNAL_REQUEST_TIMEOUT = 5
+  EXTERNAL_REQUEST_TIMEOUT = 6
   AUTHORIZATION_HEADER = { "Authorization" => "Bearer #{ENV["APPLE_MUSIC_TOKEN"]}" }
-  PLACEHOLDER_IMAGE_URL = "https://music.apple.com/assets/product/MissingArtworkMusic.svg"
-  AlbumSearchResult = Struct.new(:apple_album_id, :title, :artist, :cover)
+  PLACEHOLDER_IMAGE_URL = "/assets/apple_missing_artwork.svg"
 
   def self.search(search_string, offset=0)
     clean_search = URI.encode(search_string)
@@ -21,12 +20,15 @@ module AppleMusic
     )
     raise NoMatchingAlbumResults if response.code != 200
 
-    JSON.parse(response.body)["results"]["albums"]["data"].map do |result|
-      AlbumSearchResult.new(
+    json_response = JSON.parse(response.body)
+    raise NoMatchingAlbumResults if json_response["results"].empty?
+
+    json_response["results"]["albums"]["data"].map do |result|
+      AppleMusic::AlbumSearchResult.new(
         apple_album_id: result["id"],
         title: result["attributes"]["name"],
         artist: result["attributes"]["artistName"],
-        cover: album_cover_or_placeholder(result["attributes"]["artwork"]["url"])
+        cover: result["attributes"]["artwork"]["url"]
       )
     end
   end
@@ -56,9 +58,9 @@ module AppleMusic
   end
 
   def self.album_cover_or_placeholder(url)
-    HTTParty.get(url.gsub("{w}", "200").gsub("{h}", "200"), timeout: EXTERNAL_REQUEST_TIMEOUT).code == 200
-    url
-  rescue SocketError
+    return url if HTTParty.get(url.gsub("{w}", "200").gsub("{h}", "200"), {verify: false, timeout: 1}).code == 200
+    PLACEHOLDER_IMAGE_URL
+  rescue OpenSSL::SSL::SSLError, SocketError
     PLACEHOLDER_IMAGE_URL
   end
 end
