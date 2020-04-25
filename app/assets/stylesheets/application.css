@@ -10,8 +10,11 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require albums
  *= require bulma
+ *= require users
+ *= require albums
+ *= require lists
+ *= require site
  *= require_self
  *= require font_awesome5_webfont
  */

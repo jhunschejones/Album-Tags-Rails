@@ -1,0 +1,11 @@
+<div
+  <% if album.id %>
+  id="album-<%= album.id %>%"
+  <% end %>
+  class="album">
+  <%= link_to(album_path(album.apple_album_id)) do %>
+    <%= image_tag(cover_250(album.cover), {class: "album-cover"}) %>
+  <% end %>
+  <p class="album-title"><%= album.title %></p>
+  <p class="album-artist"><%= album.artist %></p>
+</div>

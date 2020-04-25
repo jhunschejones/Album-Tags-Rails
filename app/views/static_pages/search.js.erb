@@ -1,0 +1,8 @@
+document.querySelector(".spinner-container").classList.remove("is-active");
+<% if @albums.empty? %>
+document.querySelector(".search-results-container")
+  .insertAdjacentHTML("beforeend", "<div class='has-text-danger no-albums-message'>Sorry, it appears that no albums match your search.</div>");
+<% else %>
+document.querySelector(".search-results-container")
+  .insertAdjacentHTML("beforeend", "<%= escape_javascript(render(@albums)) %>");
+<% end %>

@@ -1,3 +1,1 @@
-<h1 class="album-name"><%= @album.title %></h1>
-<h2 class="artist-name"><%= @album.artist %>
-<%= image_tag(cover_250(@album.cover), {class: "album-cover"}) %>
+<%= render(@album) %>

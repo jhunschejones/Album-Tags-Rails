@@ -1,0 +1,33 @@
+<div class="search">
+  <div class="search-input-container">
+    <h2 class="title is-4">Search</h2>
+    <%= form_with(url: "/search", method: "get", remote: true, class: "search-form") do %>
+      <div class="control">
+        <input
+          class="input search-input"
+          type="search"
+          name="q"
+          placeholder="Search by album or artist..."
+          autocomplete="off"
+          autofocus
+        >
+      </div>
+    <% end %>
+  </div>
+
+  <div class="spinner-container">
+    <div class="spinner loader is-loading"></div>
+  </div>
+  <div class="search-results-container">
+  </div>
+</div>
+
+<script>
+  document.querySelector(".search-form").addEventListener("submit", function(){
+    var searchResults = document.querySelector(".search-results-container");
+    while (searchResults.firstChild) {
+      searchResults.removeChild(searchResults.firstChild);
+    }
+    document.querySelector(".spinner-container").classList.add("is-active");
+  });
+</script>

@@ -1,3 +1,39 @@
-.album-cover {
-  width: 250px;
+.album {
+  width: 200px;
+  padding: 6px;
+  line-height: normal;
+
+  .album-cover {
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px grey;
+    height: 188px;
+    width: 188px;
+    opacity: 1;
+    animation: fadeIn 0.3s ease;
+
+    @keyframes fadeIn {
+      0% {
+        opacity:0;
+      }
+      100% {
+        opacity:1;
+      }
+    }
+  }
+  .album-title {
+    color: rgba(0,0,0,0.87);
+    font-weight: 500;
+    margin-top: 3px;
+    margin-left: 1px;
+    margin-bottom: 0px;
+    font-size: 16px;
+  }
+  .album-artist {
+    font-weight: 300;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-bottom: 0px;
+    color: #757575;
+    font-size: 15px;
+  }
 }
