@@ -18,3 +18,7 @@
  *= require_self
  *= require font_awesome5_webfont
  */
+
+ .page-container {
+   padding-top: 52px;
+ }
