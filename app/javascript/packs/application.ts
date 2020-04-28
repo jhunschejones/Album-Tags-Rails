@@ -10,8 +10,7 @@ ActiveStorage.start();
 import MenuHamburger from "src/menu_hamburger";
 
 document.addEventListener("turbolinks:load", () => {
-  const hamburgerElement = document.querySelector(
+  new MenuHamburger(document.querySelector(
     ".navbar-burger"
-  ) as HTMLElement;
-  new MenuHamburger(hamburgerElement).initHandlers();
+  ) as HTMLElement).initHandlers();
 });
