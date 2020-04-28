@@ -2,13 +2,13 @@ require 'httparty'
 
 module AppleMusic
   class AlbumNotFound < StandardError; end
-  class NoMatchingAlbumResults < StandardError; end
+  class EmptyAlbumSearchResults < StandardError; end
 
   EXTERNAL_REQUEST_TIMEOUT = 6
   AUTHORIZATION_HEADER = { "Authorization" => "Bearer #{ENV["APPLE_MUSIC_TOKEN"]}" }
   PLACEHOLDER_IMAGE_URL = "/assets/apple_missing_artwork.svg"
 
-  def self.search(search_string, offset=0)
+  def self.search_results(search_string:, offset: 0)
     clean_search = URI.encode(search_string)
     response = HTTParty.get(
       "https://api.music.apple.com/v1/catalog/us/search?term=#{clean_search}&offset=#{offset}&limit=25&types=artists,albums",
@@ -18,10 +18,10 @@ module AppleMusic
         format: :json
       }
     )
-    raise NoMatchingAlbumResults if response.code != 200
+    raise EmptyAlbumSearchResults if response.code != 200
 
     json_response = JSON.parse(response.body)
-    raise NoMatchingAlbumResults if json_response["results"].empty?
+    raise EmptyAlbumSearchResults if json_response["results"].empty?
 
     json_response["results"]["albums"]["data"].map do |result|
       AppleMusic::AlbumSearchResult.new(
@@ -33,7 +33,7 @@ module AppleMusic
     end
   end
 
-  def self.album_details(apple_album_id)
+  def self.find_album(apple_album_id:)
     response = HTTParty.get(
       "https://api.music.apple.com/v1/catalog/us/albums/#{apple_album_id}",
       {
@@ -52,7 +52,7 @@ module AppleMusic
       artist: json_response["data"][0]["attributes"]["artistName"],
       release_date: json_response["data"][0]["attributes"]["releaseDate"],
       record_company: json_response["data"][0]["attributes"]["recordLabel"],
-      cover: album_cover_or_placeholder(json_response["data"][0]["attributes"]["artwork"]["url"]),
+      cover: json_response["data"][0]["attributes"]["artwork"]["url"],
       songs: json_response["data"][0]["relationships"]["tracks"]["data"].sort_by { |track| track["attributes"]["trackNumber"] }.map { |track| track["attributes"]["name"] }
     )
   end

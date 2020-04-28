@@ -6,10 +6,10 @@ class StaticPagesController < ApplicationController
     respond_to do |format|
       format.html
       format.js {
-        @albums = params["q"] ? AppleMusic.search(params["q"]) : []
+        @albums = params["q"] ? AppleMusic.search_results(search_string: params["q"]) : []
       }
     end
-  rescue AppleMusic::NoMatchingAlbumResults
+  rescue AppleMusic::EmptyAlbumSearchResults
     respond_to do |format|
       format.js { @albums = [] }
     end

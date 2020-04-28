@@ -1,6 +1,6 @@
 class AlbumsController < ApplicationController
 
   def show
-    @album = AppleMusic.album_details(params[:id])
+    @album = AppleMusic.find_album(apple_album_id: params[:id])
   end
 end
