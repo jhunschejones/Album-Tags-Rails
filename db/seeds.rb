@@ -16,3 +16,26 @@ end
 if User.count == 0
   User.create(name: "Joshua", email: ENV['EMAIL_USERNAME'], password: ENV['DEV_PASSWORD'], password_confirmation: ENV['DEV_PASSWORD'], confirmed_at: Time.now.utc, site_role: "site_admin")
 end
+
+if Album.count == 0
+  josh_user = User.where(email: ENV['EMAIL_USERNAME']).first
+
+  scary_kids_scaring_kids = AppleMusic.find_album(apple_album_id: "265378374")
+  scary_kids_scaring_kids.save!
+  the_question = AppleMusic.find_album(apple_album_id: "716394623")
+  the_question.save!
+
+  emo_tag = Tag.create!(text: "Emo")
+  screamo_tag = Tag.create!(text: "Screamo")
+  tag_2005 = Tag.create!(text: "2005")
+  tag_2007 = Tag.create!(text: "2007")
+
+  AlbumTag.create!(tag_id: emo_tag.id, user_id: josh_user.id, album_id: scary_kids_scaring_kids.id)
+  AlbumTag.create!(tag_id: emo_tag.id, user_id: josh_user.id, album_id: the_question.id)
+  AlbumTag.create!(tag_id: screamo_tag.id, user_id: josh_user.id, album_id: scary_kids_scaring_kids.id)
+  AlbumTag.create!(tag_id: screamo_tag.id, user_id: josh_user.id, album_id: the_question.id)
+  AlbumTag.create!(tag_id: tag_2007.id, user_id: josh_user.id, album_id: scary_kids_scaring_kids.id)
+  AlbumTag.create!(tag_id: tag_2005.id, user_id: josh_user.id, album_id: the_question.id)
+
+  AlbumConnection.create!(user_id: josh_user.id, parent_album: the_question, child_album: scary_kids_scaring_kids)
+end
