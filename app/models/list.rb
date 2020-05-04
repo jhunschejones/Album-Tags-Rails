@@ -1,5 +1,5 @@
 class List < ApplicationRecord
-  has_many :albums, through: :album_lists
+  has_and_belongs_to_many :albums
   has_many :users, through: :user_lists
 
   def creator

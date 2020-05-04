@@ -1,8 +1,8 @@
 class Album < ApplicationRecord
   has_many :album_tags
   has_many :album_lists
-  has_many :lists, through: :album_lists
   has_many :tags, through: :album_tags
+  has_and_belongs_to_many :lists
 
   def self.by_tag_text(*tag_text_list)
     Album.where(
