@@ -19,6 +19,7 @@
     <div class="spinner loader is-loading"></div>
   </div>
   <div class="search-results-container">
+    <%= render(@albums) %>
   </div>
 </div>
 
@@ -30,4 +31,5 @@
     }
     document.querySelector(".spinner-container").classList.add("is-active");
   });
+  window.history.replaceState("", "", '/search');
 </script>

@@ -4,10 +4,9 @@ class StaticPagesController < ApplicationController
 
   def search
     respond_to do |format|
+      @albums = params["q"] ? AppleMusic.search_results(search_string: params["q"]) : []
       format.html
-      format.js {
-        @albums = params["q"] ? AppleMusic.search_results(search_string: params["q"]) : []
-      }
+      format.js
     end
   rescue AppleMusic::EmptyAlbumSearchResults
     respond_to do |format|
