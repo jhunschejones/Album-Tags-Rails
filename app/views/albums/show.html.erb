@@ -1,1 +1,67 @@
-<%= render(@album) %>
+<div class="album-panel-container">
+  <div class="panel album-panel">
+    <div class="album-top-columns columns is-gapless">
+      <div class="column">
+        <%= image_tag(cover_250(@album.cover), {class: "album-cover"}) %>
+      </div>
+
+      <div class="column right-column">
+        <p class="album-name">
+          <span><%= @album.title %></span>
+        </p>
+        <p class="artist-name">
+          <%= link_to(search_url(q: @album.artist)) do %>
+            <span class="icon is-small is-left"><i class="fas fa-microphone"></i></span>
+            <span><%= @album.artist %></span>
+          <% end %>
+        </p>
+        <p class="release-year has-text-grey-light">
+          <span>&copy;&nbsp;<%= @album.release_date[0..3] %></span>
+        </p>
+      </div>
+    </div>
+
+    <p class="panel-tabs">
+      <a class="songs-toggle is-active">Songs</a>
+      <a class="tags-toggle">Tags</a>
+      <a class="connections-toggle">Connections</a>
+      <a class="lists-toggle">Lists</a>
+    </p>
+    <div class="panel-block songs-panel is-active">
+      <table class="table">
+        <tbody>
+          <% @album.songs.each_with_index do |song, index| %>
+            <tr>
+              <td class="has-text-grey-light"><%= index + 1 %></td>
+              <td><%= song %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel-block tags-panel">
+      <ul>
+        <% @album.tags.each do |tag| %>
+          <%= tag.inspect %>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="panel-block connections-panel">
+      <ul>
+        <% @album.connections.each do |connection| %>
+          <%= connection.inspect %>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="panel-block lists-panel">
+      <ul>
+        <% @album.lists.each do |list| %>
+          <%= list.inspect %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

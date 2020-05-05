@@ -37,3 +37,61 @@
     font-size: 15px;
   }
 }
+
+.album-panel-container {
+  display: flex;
+  justify-content: center;
+  .album-panel {
+    width: 600px;
+    .album-top-columns {
+      margin: 15px 15px 3px 15px;
+      .album-cover {
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px grey;
+      }
+      .right-column {
+        margin: 5px 0px 0px 0px;
+        font-weight: 500;
+        .album-name {
+          line-height: 1;
+          font-size: 25px;
+          margin-bottom: 6px;
+        }
+        .artist-name {
+          font-size: 19px;
+          a {
+            &:hover {
+              color: #3273dc;
+            }
+          }
+        }
+        .release-year {
+          padding-left: 2px;
+          font-size: 14px;
+        }
+      }
+    }
+    .songs-panel,
+    .tags-panel,
+    .connections-panel,
+    .lists-panel {
+      display: none;
+      &.is-active {
+        display: block;
+      }
+    }
+    .songs-panel {
+      .table {
+        width: 100%;
+        font-size: 14px;
+        td {
+          padding: 8px;
+          &:first-child {
+            text-align: right;
+            width: 30px;
+          }
+        }
+      }
+    }
+  }
+}
