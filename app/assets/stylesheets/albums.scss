@@ -93,5 +93,18 @@
         }
       }
     }
+    .tags-panel {
+      .album-tags {
+        margin-top: 6px;
+        .tag {
+          cursor: pointer;
+        }
+      }
+    }
+    .connections-panel {
+      .album-connections {
+        margin-top: 3px;
+      }
+    }
   }
 }

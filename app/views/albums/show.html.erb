@@ -41,22 +41,30 @@
     </div>
 
     <div class="panel-block tags-panel">
-      <ul>
-        <% @album.tags.each do |tag| %>
-          <%= tag.inspect %>
-        <% end %>
-      </ul>
+      <div class="control-row">
+        <%= link_to("Add tag", album_tags_path(@album.apple_album_id),
+                    class: "button is-warning is-small is-rounded add-tag-button") %>
+      </div>
+      <div class="album-tags">
+        <%= render(@album.tags) %>
+      </div>
     </div>
 
     <div class="panel-block connections-panel">
-      <ul>
-        <% @album.connections.each do |connection| %>
-          <%= connection.inspect %>
-        <% end %>
-      </ul>
+      <div class="control-row">
+        <%= link_to("Add connection", album_connections_path(@album.apple_album_id),
+                    class: "button is-warning is-small is-rounded add-tag-button") %>
+      </div>
+      <div class="album-connections">
+        <%= render(@album.connections) %>
+      </div>
     </div>
 
     <div class="panel-block lists-panel">
+      <div class="control-row">
+        <%= link_to("Add to list", album_lists_path(@album.apple_album_id),
+                    class: "button is-warning is-small is-rounded add-tag-button") %>
+      </div>
       <ul>
         <% @album.lists.each do |list| %>
           <%= list.inspect %>
