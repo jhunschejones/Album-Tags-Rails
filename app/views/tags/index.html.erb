@@ -1,5 +1,3 @@
 <div class="all-tags">
-  <% @tags.each do |tag| %>
-    <span class="tag is-light"><%= tag.text %></span>
-  <% end %>
+  <%= render(@tags) %>
 </div>
