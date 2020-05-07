@@ -1,8 +1,8 @@
 class Album < ApplicationRecord
   has_many :album_tags
-  has_many :album_lists
   has_many :tags, through: :album_tags
-  has_and_belongs_to_many :lists
+  has_many :album_lists
+  has_many :lists, through: :album_lists
 
   def self.by_tag_text(*tag_text_list)
     Album.where(
@@ -15,6 +15,13 @@ class Album < ApplicationRecord
       tags_list: tag_text_list,
       tags_count: tag_text_list.size
     )
+  end
+
+  def self.database_or_external(apple_album_id:)
+    album = Album.includes(tags: [:users], lists: [:users])
+                 .where(apple_album_id: apple_album_id).first
+
+    album.present? ? album : AppleMusic.find_album(apple_album_id: apple_album_id)
   end
 
   def connections
