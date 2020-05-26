@@ -4,7 +4,7 @@ class Album < ApplicationRecord
   has_many :album_lists
   has_many :lists, through: :album_lists
 
-  def self.by_tag_text(*tag_text_list)
+  def self.by_tag_text(tag_text_list)
     Album.where(
       "albums.id IN (
       SELECT album_tags.album_id FROM album_tags
@@ -18,7 +18,7 @@ class Album < ApplicationRecord
   end
 
   def self.database_or_external(apple_album_id:)
-    album = Album.includes(tags: [:users], lists: [:users])
+    album = Album.includes(album_tags: [:tag, :user], album_lists: [:list, :user])
                  .where(apple_album_id: apple_album_id).first
 
     album.present? ? album : AppleMusic.find_album(apple_album_id: apple_album_id)

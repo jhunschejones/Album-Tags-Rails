@@ -38,6 +38,17 @@
   }
 }
 
+@media screen and (max-width: 424px) {
+  .album {
+    width: 174px;
+    .album-cover {
+      height: 162px;
+      width: 162px;
+    }
+  }
+}
+
+
 .album-panel-container {
   display: flex;
   justify-content: center;
@@ -95,7 +106,7 @@
     }
     .tags-panel {
       .album-tags {
-        margin-top: 6px;
+        margin: 7px 0px 2px 0px;
         .tag {
           cursor: pointer;
         }
@@ -104,6 +115,11 @@
     .connections-panel {
       .album-connections {
         margin-top: 3px;
+      }
+    }
+    .lists-panel {
+      .album-lists {
+        margin: 7px 0px 2px 0px;
       }
     }
   }

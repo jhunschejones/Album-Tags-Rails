@@ -1,0 +1,10 @@
+<% if @tags_added %>
+var tagsContainer = document.querySelector(".tags-container");
+while (tagsContainer.firstChild) {
+  tagsContainer.removeChild(tagsContainer.firstChild);
+}
+tagsContainer.insertAdjacentHTML("beforeend", "<%= escape_javascript(render(@tags)) %>");
+<% else %>
+  alert("That tag already exists for this album!");
+<% end %>
+document.getElementsByName("tags[text]")[0].value = "";

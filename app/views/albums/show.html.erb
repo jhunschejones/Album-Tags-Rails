@@ -42,34 +42,40 @@
 
     <div class="panel-block tags-panel">
       <div class="control-row">
-        <%= link_to("Add tag", album_tags_path(@album.apple_album_id),
-                    class: "button is-warning is-small is-rounded add-tag-button") %>
+        <%= link_to("Add a tag", album_tags_path(@album.apple_album_id),
+                    class: "button is-info is-small is-rounded is-outlined add-tag-button") %>
       </div>
-      <div class="album-tags">
-        <%= render(@album.tags) %>
-      </div>
+      <% if @album.tags.present? %>
+        <div class="album-tags">
+          <%= render(@album.tags.sort_by(&:text)) %>
+        </div>
+      <% end %>
     </div>
 
     <div class="panel-block connections-panel">
       <div class="control-row">
-        <%= link_to("Add connection", album_connections_path(@album.apple_album_id),
-                    class: "button is-warning is-small is-rounded add-tag-button") %>
+        <%= link_to("Add a connection", album_connections_path(@album.apple_album_id),
+                    class: "button is-info is-small is-rounded is-outlined add-tag-button") %>
       </div>
-      <div class="album-connections">
-        <%= render(@album.connections) %>
-      </div>
+      <% if @album.connections.present? %>
+        <div class="album-connections">
+          <%= render(@album.connections) %>
+        </div>
+      <% end %>
     </div>
 
     <div class="panel-block lists-panel">
       <div class="control-row">
-        <%= link_to("Add to list", album_lists_path(@album.apple_album_id),
-                    class: "button is-warning is-small is-rounded add-tag-button") %>
+        <%= link_to("Add to a list", album_lists_path(@album.apple_album_id),
+                    class: "button is-info is-small is-rounded is-outlined add-tag-button") %>
       </div>
-      <ul>
-        <% @album.lists.each do |list| %>
-          <%= list.inspect %>
-        <% end %>
-      </ul>
+      <% if @album.lists.present? %>
+        <ul class="album-lists">
+          <% @album.lists.each do |list| %>
+            <%= list.inspect %>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
   </div>
 </div>

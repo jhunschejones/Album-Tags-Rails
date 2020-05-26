@@ -13,6 +13,7 @@
  *= require bulma
  *= require users
  *= require albums
+ *= require tags
  *= require lists
  *= require site
  *= require_self

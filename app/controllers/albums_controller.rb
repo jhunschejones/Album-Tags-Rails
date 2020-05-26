@@ -9,6 +9,7 @@ class AlbumsController < ApplicationController
   end
 
   def edit_tags
+    @tags = @album.tags.sort_by(&:text)
   end
 
   def edit_lists
@@ -27,17 +28,19 @@ class AlbumsController < ApplicationController
   end
 
   def remove_connection
-    AlbumConnection.where(
-      parent_id: params[:connected_album_id],
-      child_id: @album.id,
-      user_id: current_user.id
-    ).destroy_all
+    ActiveRecord::Base.transaction do
+      AlbumConnection.where(
+        parent_id: params[:connected_album_id],
+        child_id: @album.id,
+        user_id: current_user.id
+      ).destroy_all
 
-    AlbumConnection.where(
-      parent_id: @album.id,
-      child_id: params[:connected_album_id],
-      user_id: current_user.id
-    ).destroy_all
+      AlbumConnection.where(
+        parent_id: @album.id,
+        child_id: params[:connected_album_id],
+        user_id: current_user.id
+      ).destroy_all
+    end
 
     respond_to do |format|
       format.js
@@ -45,11 +48,21 @@ class AlbumsController < ApplicationController
   end
 
   def add_tag
-    AlbumTag.create!(
-      tag_id: Tag.find_or_create_by(text: params[:tag][:text]).id,
-      album_id: @album.id,
-      user_id: current_user.id
-    )
+    previous_tags_size = @album.tags.size
+
+    ActiveRecord::Base.transaction do
+      @album.save! if @album.new_record?
+      params["tags"]["text"].split(",").map do |new_tag|
+        AlbumTag.find_or_create_by(
+          tag_id: Tag.find_or_create_by(text: new_tag.strip.titlecase).id,
+          album_id: @album.id,
+          user_id: current_user.id
+        )
+      end
+    end
+
+    @tags = @album.tags.sort_by(&:text)
+    @tags_added = @tags.size > previous_tags_size
 
     respond_to do |format|
       format.js
@@ -59,9 +72,12 @@ class AlbumsController < ApplicationController
   def remove_tag
     AlbumTag.where(
       album_id: @album.id,
-      tag_id: params[:id],
+      tag_id: params["tag_id"],
       user_id: current_user.id
     ).destroy_all
+
+    @album.reload
+    @tags = @album.tags.sort_by(&:text)
 
     respond_to do |format|
       format.js

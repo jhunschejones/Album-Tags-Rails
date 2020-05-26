@@ -1,0 +1,5 @@
+var tagsContainer = document.querySelector(".tags-container") || document.querySelector(".album-tags");
+while (tagsContainer.firstChild) {
+  tagsContainer.removeChild(tagsContainer.firstChild);
+}
+tagsContainer.insertAdjacentHTML("beforeend", "<%= escape_javascript(render(@tags)) %>");

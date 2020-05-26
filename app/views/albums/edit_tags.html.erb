@@ -1,1 +1,23 @@
-Edit tags
+<div class="edit-tags-container">
+  <div class="new-tag-input-container">
+    <h2 class="title is-4">Add tags seperated by commas</h2>
+    <%= form_with(url: album_tags_path(@album.apple_album_id), method: "post", remote: true, class: "") do %>
+      <div class="control">
+        <input
+          class="input"
+          type="search"
+          name="tags[text]"
+          placeholder="Rock, 2020, Heavy Rhythm Guitars..."
+          autocomplete="off"
+          autofocus
+        >
+      </div>
+    <% end %>
+  </div>
+
+  <div class="tags-container">
+    <%= render(@tags, locals: { album: @album }) %>
+  </div>
+  <br/>
+  <%= link_to "Back", album_path(@album.apple_album_id), class: "button is-light", data: { turbolinks: false } %>
+</div>

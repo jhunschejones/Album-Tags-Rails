@@ -1,1 +1,14 @@
-<span class="tag is-light"><%= tag.text %></span>
+<% if @album && tag.album_tags.pluck(:user_id).include?(current_user.id) %>
+  <%= link_to("/search_by_tag?tags[]=#{tag.text}", class: "tag-link") do %>
+    <div class="tag is-info">
+      <span class="has-text-white"><%= tag.text %></span>
+      <%= link_to("", "/albums/#{@album.apple_album_id}/tags/#{tag.id}", method: :delete, remote: :true, class: "delete is-small", data: { confirm: "Are you sure you want to delete the '#{tag.text}' tag? This action is permanent and cannot be undone." }) %>
+    </div>
+  <% end %>
+<% else %>
+  <%= link_to("/search_by_tag?tags[]=#{tag.text}", class: "tag-link") do %>
+    <div class="tag is-info">
+      <span class="has-text-white"><%= tag.text %></span>
+    </div>
+  <% end %>
+<% end %>
