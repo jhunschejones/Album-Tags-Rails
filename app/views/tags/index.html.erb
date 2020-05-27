@@ -1,3 +1,12 @@
 <div class="all-tags">
-  <%= render(@tags) %>
+  <% if @searched_tags %>
+    <%= render partial: "tags", locals: { searched_tags: @searched_tags, other_tags: @other_tags } %>
+  <% else %>
+    <%= render(@tags) %>
+  <% end %>
+  <% if @albums %>
+    <div class="albums-container">
+      <%= render(@albums) %>
+    </div>
+  <% end %>
 </div>
