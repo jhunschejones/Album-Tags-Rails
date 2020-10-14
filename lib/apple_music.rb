@@ -4,7 +4,7 @@ module AppleMusic
   class AlbumNotFound < StandardError; end
   class EmptyAlbumSearchResults < StandardError; end
 
-  EXTERNAL_REQUEST_TIMEOUT = 6
+  EXTERNAL_REQUEST_TIMEOUT = 10
   AUTHORIZATION_HEADER = { "Authorization" => "Bearer #{ENV["APPLE_MUSIC_TOKEN"]}" }
   PLACEHOLDER_IMAGE_URL = "/assets/apple_missing_artwork.svg"
 
