@@ -22,20 +22,31 @@ if Album.count == 0
 
   scary_kids_scaring_kids = AppleMusic.find_album(apple_album_id: "265378374")
   scary_kids_scaring_kids.save!
+  the_city_sleeps_in_flames = AppleMusic.find_album(apple_album_id: "1359729647")
+  the_city_sleeps_in_flames.save!
   the_question = AppleMusic.find_album(apple_album_id: "716394623")
   the_question.save!
+  if_only_you_were_lonely = AppleMusic.find_album(apple_album_id: "464931799")
+  if_only_you_were_lonely.save!
 
   emo_tag = Tag.create!(text: "Emo")
   screamo_tag = Tag.create!(text: "Screamo")
   tag_2005 = Tag.create!(text: "2005")
+  tag_2006 = Tag.create!(text: "2006")
   tag_2007 = Tag.create!(text: "2007")
 
   AlbumTag.create!(tag_id: emo_tag.id, user_id: josh_user.id, album_id: scary_kids_scaring_kids.id)
   AlbumTag.create!(tag_id: emo_tag.id, user_id: josh_user.id, album_id: the_question.id)
   AlbumTag.create!(tag_id: screamo_tag.id, user_id: josh_user.id, album_id: scary_kids_scaring_kids.id)
+  AlbumTag.create!(tag_id: screamo_tag.id, user_id: josh_user.id, album_id: the_city_sleeps_in_flames.id)
   AlbumTag.create!(tag_id: screamo_tag.id, user_id: josh_user.id, album_id: the_question.id)
+  AlbumTag.create!(tag_id: screamo_tag.id, user_id: josh_user.id, album_id: if_only_you_were_lonely.id)
   AlbumTag.create!(tag_id: tag_2007.id, user_id: josh_user.id, album_id: scary_kids_scaring_kids.id)
   AlbumTag.create!(tag_id: tag_2005.id, user_id: josh_user.id, album_id: the_question.id)
+  AlbumTag.create!(tag_id: tag_2006.id, user_id: josh_user.id, album_id: if_only_you_were_lonely.id)
+  AlbumTag.create!(tag_id: tag_2005.id, user_id: josh_user.id, album_id: the_city_sleeps_in_flames.id)
 
   AlbumConnection.create!(user_id: josh_user.id, parent_album: the_question, child_album: scary_kids_scaring_kids)
+  AlbumConnection.create!(user_id: josh_user.id, parent_album: scary_kids_scaring_kids, child_album: the_city_sleeps_in_flames)
+  AlbumConnection.create!(user_id: josh_user.id, parent_album: scary_kids_scaring_kids, child_album: if_only_you_were_lonely)
 end

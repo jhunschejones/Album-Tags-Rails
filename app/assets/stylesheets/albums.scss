@@ -48,12 +48,11 @@
   }
 }
 
-
 .album-panel-container {
   display: flex;
   justify-content: center;
   .album-panel {
-    width: 600px;
+    width: 625px;
     .album-top-columns {
       margin: 15px 15px 3px 15px;
       .album-cover {
@@ -126,6 +125,9 @@
             position: absolute;
             margin-left: 180px;
             margin-top: 2px;
+            @media screen and (max-width: 424px) {
+              margin-left: 155px;
+            }
           }
         }
       }
