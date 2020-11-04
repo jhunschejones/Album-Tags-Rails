@@ -1,8 +1,9 @@
 <div
   <% if album.id %>
-  id="album-<%= album.id %>%"
+  id="album-<%= album.id %>"
   <% end %>
-  class="album">
+  class="album"
+>
   <%= link_to(album_path(album.apple_album_id), data: { turbolinks: false }) do %>
     <%= image_tag(cover_250(album.cover), {class: "album-cover"}) %>
   <% end %>

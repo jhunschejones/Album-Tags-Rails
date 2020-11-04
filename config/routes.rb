@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :albums, only: [:show] do
     get 'connections', to: 'albums#edit_connections'
     post 'connections', to: 'albums#add_connection'
-    delete 'connections/:connection_apple_album_id', to: 'albums#remove_connection'
+    delete 'connections/:connected_album_id', to: 'albums#remove_connection'
 
     get 'tags', to: 'albums#edit_tags'
     post 'tags', to: 'albums#add_tag'

@@ -45,7 +45,7 @@
         <%= link_to("Add a tag", album_tags_path(@album.apple_album_id),
                     class: "button is-info is-small is-rounded is-outlined add-tag-button") %>
       </div>
-      <% if @album.tags.present? %>
+      <% if @album.tags.exists? %>
         <div class="album-tags">
           <%= render(@album.tags.sort_by(&:text)) %>
         </div>
@@ -57,9 +57,9 @@
         <%= link_to("Add a connection", album_connections_path(@album.apple_album_id),
                     class: "button is-info is-small is-rounded is-outlined add-tag-button") %>
       </div>
-      <% if @album.connections.present? %>
+      <% if @album.connections.exists? %>
         <div class="album-connections">
-          <%= render(@album.connections) %>
+          <%= render(partial: 'albums/connection', collection: @album.connections, as: :connection) %>
         </div>
       <% end %>
     </div>
@@ -69,7 +69,7 @@
         <%= link_to("Add to a list", album_lists_path(@album.apple_album_id),
                     class: "button is-info is-small is-rounded is-outlined add-tag-button") %>
       </div>
-      <% if @album.lists.present? %>
+      <% if @album.lists.exists? %>
         <ul class="album-lists">
           <% @album.lists.each do |list| %>
             <%= list.inspect %>

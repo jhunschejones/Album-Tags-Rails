@@ -1,5 +1,5 @@
 class AlbumsController < ApplicationController
-  before_action :set_album
+  before_action :set_album, except: [:remove_connection]
   before_action :set_user_list, only: [:add_to_list, :remove_from_list]
 
   def show
@@ -30,14 +30,14 @@ class AlbumsController < ApplicationController
   def remove_connection
     ActiveRecord::Base.transaction do
       AlbumConnection.where(
-        parent_id: params[:connected_album_id],
-        child_id: @album.id,
+        parent_album_id: params[:connected_album_id],
+        child_album_id: params[:album_id],
         user_id: current_user.id
       ).destroy_all
 
       AlbumConnection.where(
-        parent_id: @album.id,
-        child_id: params[:connected_album_id],
+        parent_album_id: params[:album_id],
+        child_album_id: params[:connected_album_id],
         user_id: current_user.id
       ).destroy_all
     end

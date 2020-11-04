@@ -82,6 +82,9 @@
         }
       }
     }
+    .control-row {
+      padding: 5px 0px;
+    }
     .songs-panel,
     .tags-panel,
     .connections-panel,
@@ -115,6 +118,16 @@
     .connections-panel {
       .album-connections {
         margin-top: 3px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        .album-connection {
+          .delete {
+            position: absolute;
+            margin-left: 180px;
+            margin-top: 2px;
+          }
+        }
       }
     }
     .lists-panel {
