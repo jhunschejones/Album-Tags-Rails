@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2020_04_12_042514) do
     t.string "release_date", null: false
     t.string "record_company", null: false
     t.string "cover", null: false
-    t.string "songs", default: [], array: true
+    t.jsonb "songs"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

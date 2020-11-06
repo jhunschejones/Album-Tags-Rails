@@ -30,12 +30,7 @@
     <div class="panel-block songs-panel is-active">
       <table class="table">
         <tbody>
-          <% @album.songs.each_with_index do |song, index| %>
-            <tr>
-              <td class="has-text-grey-light"><%= index + 1 %></td>
-              <td><%= song %></td>
-            </tr>
-          <% end %>
+          <%= render(partial: 'albums/song', collection: @album.songs, as: :song) %>
         </tbody>
       </table>
     </div>

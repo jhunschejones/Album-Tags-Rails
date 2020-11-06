@@ -62,7 +62,7 @@ class AlbumsController < ApplicationController
     end
 
     @tags = @album.tags.sort_by(&:text)
-    @tags_added = @tags.size > previous_tags_size
+    @tags_were_added = @tags.size > previous_tags_size
 
     respond_to do |format|
       format.js

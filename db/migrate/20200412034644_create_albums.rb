@@ -8,7 +8,7 @@ class CreateAlbums < ActiveRecord::Migration[6.0]
       t.string :release_date, null: false
       t.string :record_company, null: false
       t.string :cover, null: false
-      t.string :songs, array: true, default: []
+      t.jsonb :songs
 
       t.timestamps
     end

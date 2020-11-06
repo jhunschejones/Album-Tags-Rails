@@ -1,7 +1,4 @@
-<div
-  class="album-connection"
-  id="connected-album-<%= connection.id %>"
->
+<div class="album-connection" id="connected-album-<%= connection.id %>">
   <%= link_to("", "/albums/#{@album.id}/connections/#{connection.id}",
               method: :delete, remote: :true, class: "delete",
               data: { confirm: "Are you sure you want to remove this connected album? This action is permanent and cannot be undone." }) %>
